@@ -75,9 +75,16 @@ int main()
             break;
 
             defualt :
-            printf("Wrong choice: ");
-            break;
+            printf("Wrong choice");
 
+            
+            
+            
+            
+            
+            
+            
+            
 
         }
     }
