@@ -20,25 +20,24 @@ void display()
     
     }
 }
-void insertend(int val)
+int insertend(int val)
 {
-  if ((r+1)%n==f)
-  printf("queue is full....");
+  if (r>=n-1)
+  printf("queue is full....\n");
   else if(r<0)
   {
     f=r=0;
-    a[r]=val;
+    a[r]=val;                                                                                                                           
     //printf("\ninserted element is: %d",val);
   }
   else 
   {
-    r=(r+1)%n;
-    a[r]=val;
+    a[++r]=val;
     //printf("\ninserted element is: %d",val);
 
   }
 }  
-void delete()
+ int deletefirst()
 {
     if(f<0)
     printf("queue is already empty...");
@@ -50,14 +49,49 @@ void delete()
     else
     {
          //printf("\ndeleted element is: %d",a[f]);
-         f=(f+1)%n;
+         ++f;
+    }
+}
+
+int insertfirst(int val)
+{
+  if (f==0)
+  printf("no insert this time: ");
+  else if(f<0)
+  {
+    f=r=0;
+    a[r]=val;
+    //printf("\ninserted element is: %d",val);
+  }
+  else 
+  {
+    a[--f]=val;
+    //printf("\ninserted element is: %d",val);
+
+  }
+}  
+int deleteend()
+{
+    if(r<0)
+    printf("queue is already empty...");
+    else if(r==f)
+    {
+        //printf("\ndeleted element is: %d",a[f]);
+        f=-1,r=-1;
+    }
+    else
+    {
+         //printf("\ndeleted element is: %d",a[f]);
+         r--;
     }
 }
 int main()
 {
    int x,ch;
    printf("1. insert element at last position : ");
-   printf("\n2. delete element at last position: ");
+   printf("\n2. delete element at first position: ");
+   printf("\n3.insert element at first position: ");
+   printf("\n4.delete element at last position: ");
    printf("\n9. display array: ");
    printf("\n0. exit\n");
    while(ch!=0)
@@ -73,7 +107,17 @@ int main()
          break;
 
          case 2:
-         delete();
+         deletefirst();
+         break;
+
+         case 3:
+         printf("Enter element: ");
+         scanf("%d",&x);
+         insertfirst(x);
+         break;
+
+         case 4:
+         deleteend();
          break;
 
          case 9:

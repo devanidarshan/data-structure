@@ -16,7 +16,7 @@ int main()
     {
         for(j=0;j<n;j++)
         {
-           if(a[i]<a[j])
+           if(a[i]>a[j])
            {
             t=a[i];
             a[i]=a[j];
