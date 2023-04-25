@@ -8,7 +8,7 @@ struct self
 
 int main()
 {
-    struct self a,b;
+    struct self a,b,d;
      a.n = 65;
      a.c = 'A';
      a.ptr = NULL;
@@ -17,10 +17,17 @@ int main()
      b.c = 'B';
      b.ptr = NULL;
 
+
+
      printf("A -> Value of n: %d\t ch: %c",a.n,a.c);
      printf("\nB -> Value of n: %d\t ch: %c",b.n,b.c);
+     
 
-     b.ptr = &a;
      a.ptr = &b;
-     //printf("A -> Value of n: %d\t ch : %c",b.ptr -> n,b.ptr -> c);
+     b.ptr = &a;
+     d.ptr = &b;
+
+     //printf("\nA -> Value of n: %d\t ch : %c",b.ptr -> n,b.ptr -> c);
+     printf("\nB -> Value of n: %d\t ch : %c",a.ptr -> n,a.ptr -> c);
+     printf("\nD -> Value of n: %d\t ch : %c",b.ptr -> n,b.ptr -> c);
 }  
