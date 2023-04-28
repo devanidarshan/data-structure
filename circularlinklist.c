@@ -1,69 +1,77 @@
 #include<stdio.h>
 #include<stdlib.h>
-struct node
-{
+struct node{
     int data;
-    struct node * next,* prev;
-
+    struct node *next,*prev;
 };
-struct node * head = NULL;
+struct node *head = NULL;
 
 int display()
 {
-    struct node * ptr = head;
+    struct node *ptr = head;
     if(ptr == NULL)
-    printf("List is empty....");
+        printf("List is empty....");
+   
     else
     {
-        while(ptr != NULL)
+        while(ptr->next != head)
         {
-            printf("%d ",ptr -> data);
-            ptr = ptr -> next;
+            printf("%d ",ptr->data);
+            ptr = ptr->next;
         }
+        printf("%d ",ptr->data);
     }
-         printf("\n");
+    printf("\n");
+
 }
 
 void insertend(int val)
 {
     struct node *ptr = head;
-    struct node *temp = (struct node*)malloc(sizeof (struct node));
-    temp -> data = val;
-    temp -> next = NULL;
+    struct node *temp = (struct node*)malloc(sizeof(struct node));
+    temp->data = val;
+
     if(head == NULL)
     {
-        head = temp;
+        head  = temp;
+        temp->next = head;
         return;
     }
-      while(ptr -> next!=NULL)
-      ptr = ptr -> next;
-      ptr -> next = temp;
-      return;
+
+    while(ptr->next != head)
+        ptr = ptr->next;
+    ptr->next = temp;
+    temp->next = head;
+    return;
 }
+
 
 void deleteend()
 {
     struct node *ptr = head;
     struct node *prev;
-    if(head == NULL)
-    printf("List is already empty.... ");
-    else if(ptr -> next == NULL)
+
+    if (head == NULL)
+        printf("\nList is Already Empty....");
+    else if (ptr->next == head)
     {
         head = NULL;
         free(ptr);
     }
     else
     {
-        while(ptr -> next != NULL)
+        while (ptr->next != head)
         {
             prev = ptr;
-            ptr = ptr ->  next;
+            ptr = ptr->next;
         }
-        prev -> next = NULL;
+        prev->next = head;
         free(ptr);
     }
-       return;
+    return;
 }
+
+
 
 void insertmid(int val,int pos)
 {
@@ -100,20 +108,40 @@ void deletemid(int pos)
 
 void insertfirst(int val)
 {
-    struct node * temp=(struct node*)malloc(sizeof (struct node));
-    temp -> data=val;
-    temp -> next=head;
+    struct node *ptr = head;
+    struct node *temp = (struct node*)malloc(sizeof(struct node));
+    temp->data = val;
+
+    if(head == NULL)
+    {
+        head  = temp;
+        temp->next = head;
+        return;
+    }
+
+    while(ptr->next != head)
+        ptr = ptr->next;
+    ptr->next = temp;
+    temp->next = head;
     head = temp;
     return;
 }
-
 void deletefirst()
 {
-    struct node*ptr = head;
-    head = ptr -> next;
-    free (ptr);
+    struct node *ptr = head;
+    struct node *temp = head;
+
+    if(head == NULL)
+        printf("List is already empty....\n");
+
+    while(ptr->next != head)
+        ptr = ptr->next;
+    ptr->next = temp->next;
+    head = temp->next;
+    free(temp);
     return;
 }
+
 int main()
 {
    int x,y,ch;
@@ -178,4 +206,4 @@ int main()
        
        }
     }while(ch!=0);
-} 
+}
